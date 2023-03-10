@@ -8,4 +8,7 @@ def arithmetic_arranger(problems):
         if operation != "+" and operation != '-':
             return "Error: Operator must be '+' or '-'."
 
+        if int(first) > 9999 or int(second) > 9999:
+            return "Error: Numbers cannot be more than four digits."
+
     return None
