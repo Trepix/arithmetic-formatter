@@ -25,11 +25,9 @@ def arithmetic_arranger(problems):
     if error:
         return error
 
-    first_operation = arithmetic_operations[0]
-    second_operation = arithmetic_operations[1]
-    return "\n".join(["    ".join([first_operation.first(), second_operation.first()]),
-                      "    ".join([first_operation.second(), second_operation.second()]),
-                      "    ".join([first_operation.equal_line(), second_operation.equal_line()])])
+    return "\n".join(["    ".join(map(ArithmeticOperation.first, arithmetic_operations)),
+                      "    ".join(map(ArithmeticOperation.second, arithmetic_operations)),
+                      "    ".join(map(ArithmeticOperation.equal_line, arithmetic_operations))])
 
 class ArithmeticOperation:
     def __init__(self, first, operation, second):
