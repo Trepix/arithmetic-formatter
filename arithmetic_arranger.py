@@ -11,7 +11,7 @@ def arithmetic_arranger(problems):
         if not (first.isdigit() and second.isdigit()):
             return "Error: Numbers must only contain digits."
 
-        if int(first) > 9999 or int(second) > 9999:
+        if len(first) > 4 or len(second) > 4:
             return "Error: Numbers cannot be more than four digits."
 
     return None
