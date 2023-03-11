@@ -18,16 +18,24 @@ def parse(problems):
 
     return result, None
 
+
 def space(iterable):
     return "    ".join(iterable)
-def arithmetic_arranger(problems):
+
+
+def arithmetic_arranger(problems, calculate = False):
     arithmetic_operations, error = parse(problems)
     if error:
         return error
 
-    return "\n".join([space(map(ArithmeticOperation.first_line, arithmetic_operations)),
-                      space(map(ArithmeticOperation.second_line, arithmetic_operations)),
-                      space(map(ArithmeticOperation.equal_line, arithmetic_operations))])
+    lines = [space(map(ArithmeticOperation.first_line, arithmetic_operations)),
+             space(map(ArithmeticOperation.second_line, arithmetic_operations)),
+             space(map(ArithmeticOperation.equal_line, arithmetic_operations))]
+    if calculate:
+        lines.append(space(map(ArithmeticOperation.result, arithmetic_operations)))
+
+    return "\n".join(lines)
+
 
 class ArithmeticOperation:
     def __init__(self, first_number, operation, second_number):
@@ -39,13 +47,25 @@ class ArithmeticOperation:
 
     def _first_whitespaces(self):
         return self.total_characters - len(self._first_number)
+
     def first_line(self):
         return " " * self._first_whitespaces() + self._first_number
 
     def _second_whitespaces(self):
         return self.total_characters - len(self._second_number) - len(self._sign)
+
     def second_line(self):
-        return self._sign + " "* self._second_whitespaces() + self._second_number
+        return self._sign + " " * self._second_whitespaces() + self._second_number
 
     def equal_line(self):
         return "-" * self.total_characters
+
+    def _calculate(self):
+        if self._sign == "+":
+            return str(int(self._first_number) + int(self._second_number))
+        else:
+            return str(int(self._first_number) - int(self._second_number))
+
+    def result(self):
+        result = self._calculate()
+        return " " * (self.total_characters - len(result)) + result
