@@ -18,8 +18,6 @@ def parse(problems):
 
     return result, None
 
-
-
 def arithmetic_arranger(problems):
     arithmetic_operations, error = parse(problems)
     if error:
@@ -40,7 +38,7 @@ class ArithmeticOperation:
     def _first_whitespaces(self):
         return self.total_characters - len(self._first)
     def first(self):
-        return " " * (self.total_characters - len(self._first)) + self._first
+        return " " * self._first_whitespaces() + self._first
 
     def _second_whitespaces(self):
         return self.total_characters - len(self._second) - len(self._sign)
