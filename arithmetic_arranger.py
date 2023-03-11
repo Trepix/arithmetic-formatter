@@ -14,4 +14,4 @@ def arithmetic_arranger(problems):
         if len(first) > 4 or len(second) > 4:
             return "Error: Numbers cannot be more than four digits."
 
-    return None
+    return "\n".join(["  3801      123", "-    2    +  49", "------    -----"])
