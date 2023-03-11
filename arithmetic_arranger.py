@@ -26,8 +26,8 @@ def arithmetic_arranger(problems):
         return error
 
     first_operation = arithmetic_operations[0]
-    return "\n".join(["  " + first_operation.first() +"      123",
-                      first_operation.sign() +"    "+first_operation.second()+"    +  49",
+    return "\n".join([first_operation.first() +"      123",
+                      first_operation.sign() + first_operation.second()+"    +  49",
                       "------    -----"])
 
 class ArithmeticOperation:
@@ -35,12 +35,18 @@ class ArithmeticOperation:
         self._sign = operation
         self._first = first
         self._second = second
+        longest_digits = max(len(first), len(second))
+        self.total_characters = longest_digits + len(self._sign) + 1
 
+    def _first_whitespaces(self):
+        return self.total_characters - len(self._first)
     def first(self):
-        return self._first
+        return " " * (self.total_characters - len(self._first)) + self._first
 
+    def _second_whitespaces(self):
+        return self.total_characters - len(self._second) - len(self._sign)
     def second(self):
-        return self._second
+        return " " * self._second_whitespaces() + self._second
 
     def sign(self):
         return self._sign
