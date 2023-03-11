@@ -18,32 +18,34 @@ def parse(problems):
 
     return result, None
 
+def space(iterable):
+    return "    ".join(iterable)
 def arithmetic_arranger(problems):
     arithmetic_operations, error = parse(problems)
     if error:
         return error
 
-    return "\n".join(["    ".join(map(ArithmeticOperation.first, arithmetic_operations)),
-                      "    ".join(map(ArithmeticOperation.second, arithmetic_operations)),
-                      "    ".join(map(ArithmeticOperation.equal_line, arithmetic_operations))])
+    return "\n".join([space(map(ArithmeticOperation.first_line, arithmetic_operations)),
+                      space(map(ArithmeticOperation.second_line, arithmetic_operations)),
+                      space(map(ArithmeticOperation.equal_line, arithmetic_operations))])
 
 class ArithmeticOperation:
-    def __init__(self, first, operation, second):
+    def __init__(self, first_number, operation, second_number):
         self._sign = operation
-        self._first = first
-        self._second = second
-        longest_digits = max(len(first), len(second))
+        self._first_number = first_number
+        self._second_number = second_number
+        longest_digits = max(len(first_number), len(second_number))
         self.total_characters = longest_digits + len(self._sign) + 1
 
     def _first_whitespaces(self):
-        return self.total_characters - len(self._first)
-    def first(self):
-        return " " * self._first_whitespaces() + self._first
+        return self.total_characters - len(self._first_number)
+    def first_line(self):
+        return " " * self._first_whitespaces() + self._first_number
 
     def _second_whitespaces(self):
-        return self.total_characters - len(self._second) - len(self._sign)
-    def second(self):
-        return self._sign + " "* self._second_whitespaces() + self._second
+        return self.total_characters - len(self._second_number) - len(self._sign)
+    def second_line(self):
+        return self._sign + " "* self._second_whitespaces() + self._second_number
 
     def equal_line(self):
         return "-" * self.total_characters
