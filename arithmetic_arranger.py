@@ -28,7 +28,7 @@ def arithmetic_arranger(problems):
     first_operation = arithmetic_operations[0]
     second_operation = arithmetic_operations[1]
     return "\n".join(["    ".join([first_operation.first(), second_operation.first()]),
-                      "    ".join([first_operation.sign() + first_operation.second(), second_operation.sign() + second_operation.second()]),
+                      "    ".join([first_operation.second(), second_operation.second()]),
                       "------    -----"])
 
 class ArithmeticOperation:
@@ -47,7 +47,4 @@ class ArithmeticOperation:
     def _second_whitespaces(self):
         return self.total_characters - len(self._second) - len(self._sign)
     def second(self):
-        return " " * self._second_whitespaces() + self._second
-
-    def sign(self):
-        return self._sign
+        return self._sign + " "* self._second_whitespaces() + self._second
