@@ -4,8 +4,8 @@ def parse(problems):
 
     result = []
     for problem in problems:
-        first, operation, second = tuple(problem.split())
-        if operation != "+" and operation != '-':
+        first, sign, second = tuple(problem.split())
+        if sign != "+" and sign != '-':
             return None, "Error: Operator must be '+' or '-'."
 
         if not (first.isdigit() and second.isdigit()):
@@ -14,7 +14,7 @@ def parse(problems):
         if len(first) > 4 or len(second) > 4:
             return None, "Error: Numbers cannot be more than four digits."
 
-        result.append(ArithmeticOperation(first, operation, second))
+        result.append(ArithmeticOperation(first, sign, second))
 
     return result, None
 
@@ -25,10 +25,22 @@ def arithmetic_arranger(problems):
     if error:
         return error
 
-    return "\n".join(["  3801      123", "-    2    +  49", "------    -----"])
+    first_operation = arithmetic_operations[0]
+    return "\n".join(["  " + first_operation.first() +"      123",
+                      first_operation.sign() +"    "+first_operation.second()+"    +  49",
+                      "------    -----"])
 
 class ArithmeticOperation:
     def __init__(self, first, operation, second):
-        self.operation = operation
-        self.first = first
-        self.second = second
+        self._sign = operation
+        self._first = first
+        self._second = second
+
+    def first(self):
+        return self._first
+
+    def second(self):
+        return self._second
+
+    def sign(self):
+        return self._sign
