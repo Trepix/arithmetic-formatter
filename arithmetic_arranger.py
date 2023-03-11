@@ -26,8 +26,9 @@ def arithmetic_arranger(problems):
         return error
 
     first_operation = arithmetic_operations[0]
-    return "\n".join([first_operation.first() +"      123",
-                      first_operation.sign() + first_operation.second()+"    +  49",
+    second_operation = arithmetic_operations[1]
+    return "\n".join([first_operation.first() + "    " +second_operation.first(),
+                      first_operation.sign() + first_operation.second()+"    " + second_operation.sign() + second_operation.second(),
                       "------    -----"])
 
 class ArithmeticOperation:
