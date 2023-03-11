@@ -29,7 +29,7 @@ def arithmetic_arranger(problems):
     second_operation = arithmetic_operations[1]
     return "\n".join(["    ".join([first_operation.first(), second_operation.first()]),
                       "    ".join([first_operation.second(), second_operation.second()]),
-                      "------    -----"])
+                      "    ".join([first_operation.equal_line(), second_operation.equal_line()])])
 
 class ArithmeticOperation:
     def __init__(self, first, operation, second):
@@ -48,3 +48,6 @@ class ArithmeticOperation:
         return self.total_characters - len(self._second) - len(self._sign)
     def second(self):
         return self._sign + " "* self._second_whitespaces() + self._second
+
+    def equal_line(self):
+        return "-" * self.total_characters
